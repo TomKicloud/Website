@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Gary Portal</title>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="assets/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/css/util.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body onLoad="setup()">
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100" style="width: 700px">
+				<form class="login100-form validate-form">
+					<span class="login100-form-title p-b-26">
+						Create an Account
+					</span>
+					<span class="login100-form-title p-b-48">
+						<i class="zmdi zmdi-font"></i>
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+						<input class="input100" type="text" id="emaillogin">
+						<span class="focus-input100" data-placeholder="Email"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<span class="btn-show-pass">
+							<i class="zmdi zmdi-eye"></i>
+						</span>
+						<input class="input100" type="password" id="passwordlogin">
+						<span class="focus-input100" data-placeholder="Password"></span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate="Confirm password">
+						<span class="btn-show-pass">
+							<i class="zmdi zmdi-eye"></i>
+						</span>
+						<input class="input100" type="password" id="passwordconfirm">
+						<span class="focus-input100" data-placeholder="Confirm Password"></span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate="Full Name">
+						<input class="input100" type="name" id="fullname">
+						<span class="focus-input100" data-placeholder="Full Name"></span>
+					</div>
+				</form>
+				<div class="container-login100-form-btn">
+						<button class="login100-form-btn" onClick="openPicker()" style="height: 50px; background-color: blue; border-radius: 30px" id="select_image">
+							Upload Profile Picture
+						</button>
+					<img style="width=100%; height: 100%; align-content: center; margin-top: 20px; border-radius: 30px; max-width: 500px" id="target">
+
+				</div>
+
+				<div class="container-login100-form-btn" style="margin-top: 100px">
+					<div class="wrap-login100-form-btn">
+						<div class="login100-form-bgbtn"></div>
+						<button class="login100-form-btn" onClick="signUp()" >
+							Login
+						</button>
+					</div>
+				</div>
+
+				<div class="text-center p-t-115" style="margin-top: -100px">
+					<span class="txt1">
+						Have an account?
+					</span>
+
+					<a class="txt2" href="https://www.almurray.xyz">
+						Log in &rarr;
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+	<script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/vendor/bootstrap/js/popper.js"></script>
+	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/vendor/daterangepicker/moment.min.js"></script>
+	<script src="assets/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/js/main.js"></script>
+
+	<script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
+	<script>
+		function setup() {
+			var config = {
+				apiKey: "AIzaSyAsrjD3G2Fpi4uxV6aFbTfAmF4ecXrG480",
+				authDomain: "gary-portal.firebaseapp.com",
+				databaseURL: "https://gary-portal.firebaseio.com",
+				projectId: "gary-portal",
+				storageBucket: "gary-portal.appspot.com",
+				messagingSenderId: "921790064702"
+			};
+			firebase.initializeApp(config);
+		 }
+	</script>
+
+	<script>
+		function login() {
+			var email = document.getElementById('emaillogin').value;
+			var pass = document.getElementById('passwordlogin').value;
+
+			firebase.auth().signInWithEmailAndPassword(email,pass).then(function(user) {
+				alert("logged in");
+
+			}).catch(function(error) {
+				var message = error.message;
+				var code = error.code;
+				if (message == "There is no user record corresponding to this identifier. The user may have been deleted.") {
+					alert("There was no account found with this email.")
+				} else {
+					alert(message);
+				}
+			});
+		}
+	</script>
+
+	<script src="https://static.filestackapi.com/v3/filestack.js"></script>
+	<script type="text/javascript">
+		var fsClient = filestack.init('AkxxcX4yeRru0S79kbIZLz');
+  		function openPicker() {
+    		fsClient.pick({
+				fromSources:["local_file_system","url","imagesearch","instagram","googledrive","webcam"],
+      			accept:["image/*"],
+				transformations:{
+      				circle:true}
+    		}).then(function(result) {
+				const link = document.getElementById('target');
+      			const fileUrl = result.filesUploaded[0].url;
+  				link.setAttribute('src', fileUrl);
+			});
+  		}
+	</script>
+
+	<script>
+		function signUp() {
+			var email = document.getElementById('emaillogin');
+			var pass = document.getElementById('passwordlogin');
+			var conf = document.getElementById('passwordconfirm');
+			var fullname = document.getElementById('fullname');
+
+			var canWrite = true;
+			if (email.value.length < 3) {
+				alert("Please enter your e-mail address");
+				canWrite = false;
+				return;
+			}
+
+			if (pass.value.length < 6) {
+				alert("Your password must be longer than 6 characters.");
+				canWrite = false;
+				return;
+			}
+			if (pass.value != conf.value) {
+				console.log(pass.value);
+				console.log(conf.value);
+				alert("Your passwords do not match!");
+				canWrite = false;
+				return;
+			}
+
+			if (document.getElementById('target').getAttribute('src') == null) {
+				alert("Please set a profile picture");
+				canWrite = false;
+				return;
+			}
+
+			if (fullname.value < 3) {
+				alert("Please enter your full name");
+				canWrite = false;
+				return;
+			}
+
+			if (canWrite == true) {
+				var globalref = firebase.database().ref();
+				firebase.auth().createUserWithEmailAndPassword(email.value, pass.value).then(function(user) {
+				firebase.database().ref('users/' + user.uid).set({
+					email: email.value,
+					pass: pass.value,
+					aPoints: 0,
+					aRank: "TBA",
+					banned: false,
+					bannedR: "",
+					chatBan: false,
+					fullName: fullname.value,
+					pPoints: 0,
+					pRank: "TBA",
+					queued: true,
+					sName: "TBA",
+					admin: false,
+					staff: false,
+					team: "TBA",
+					uid: user.uid,
+					urlToImage: document.getElementById('target').getAttribute('src'),
+					id: "TBA",
+					desc: "Your description here",
+					quote: "Set a featured quote",
+					standing: "Good",
+					teamRank: "TBA",
+					mainRole: "TBA",
+					sendbird: false,
+					prayersSimple: 0,
+					prayersMeaningful: 0
+
+				});
+				window.location = "queue";
+
+
+			}).catch(function(error) {
+				var errorCode = error.code;
+				var errorMessage = error.message;
+				alert(errorMessage);
+			});
+			}
+
+		}
+
+	</script>
+
+</body>
+</html>

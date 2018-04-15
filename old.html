@@ -1,0 +1,361 @@
+<!doctype html>
+<html><head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+
+
+
+
+<title>DOJRP CAD</title>
+</head>
+
+<body onLoad="setup()">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="assets/js/materialize.min.js"></script>
+<nav>
+
+    <div class="nav-wrapper" style="background-color: #333">
+      <a href="#" class="brand-logo center">DOJRP</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="collapsible.html">My Account</a></li>
+      </ul>
+    </div>
+  </nav>
+
+ <div class="row">
+      <div class="col s12 m12">
+        <div class="card-panel white">
+         <h5 align="center">Updates / Announcements: (Latest Update 0.1.0) </h5>
+          <p class="grey-text" align="center">Welcome to the DOJRP CAD! If you do not have access, please see an FTO Lead to get you all set up.
+          
+          </p>
+        </div>
+      </div>
+</div>
+
+<div class="row" style="align-content: center; text-align: center">
+ <a class="btn modal-trigger" href="#modal1" style="width: 68%">Patrol</a>
+	
+</div>
+
+<div class="container">
+	<div class="card" style="border-radius: 20px">
+    <div class="card-content" style="text-align: center">
+      <p>Found a bug? Got a suggestion? Put'em here:</p>
+    </div>
+   <div class="card-tabs">
+      <ul class="tabs tabs-fixed-width">
+        <li class="tab"><a class="active" href="#sugg">Suggestion</a></li>
+        <li class="tab"><a href="#bug">Bug</a></li>
+      </ul>
+    </div>
+    <div class="card-content grey lighten-4">
+      <div id="sugg">
+      	<div class="row">
+      		<div class="input-field col s12">
+          		<input id="suggname" type="text">
+          		<label for="suggname">TS Name (i.e. Tom K. Civ-30)</label>
+        	</div>
+    		<div class="input-field col s12">
+          		<input id="suggsugg" type="text">
+          		<label for="suggsugg">Suggestion</label>
+        	</div>
+        	<div class="input-field col s12" style="text-align: center; align-content: center">
+          		<a class="btn" onClick="sugg()">Submit</a>
+        	</div>
+        	
+  		</div>
+      </div>
+      <div id="bug"><div class="row">
+      		<div class="input-field col s12">
+          		<input id="bugname" type="text">
+          		<label for="bugname">TS Name (i.e. Tom K. Civ-30)</label>
+        	</div>
+    		<div class="input-field col s12">
+          		<input id="bugbug" type="text">
+          		<label for="bugbug">Bug</label>
+        	</div>
+        	<div class="input-field col s12" style="text-align: center; align-content: center">
+          		<a class="btn" onClick="bug()">Submit</a>
+        	</div>
+        	
+  		</div></div>
+    </div>
+  </div>
+</div>
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal bottom-sheet" style="align-content: center; text-align: center; display: none">
+    <div class="modal-content">
+      <h4>Select Department</h4>
+    </div>
+    <div class="modal-footer" style="align-content: center; text-align: center">
+    <ul id="list" style="align-content: center; text-align: center; display: inline-block; float: none">
+		<li><a onClick="lspd()"><img src="assets/images/lspd.png"> <figcaption style="text-align: center; align-content: center">LSPD</figcaption></a></li>
+		<li><a onClick="bcso()"><img src="assets/images/bcso.png" /> <figcaption style="text-align: center; align-content: center">BCSO</figcaption></a></li>
+		<li><a onClick="sahp()"><img src="assets/images/sahp.png" /> <figcaption style="text-align: center; align-content: center">SAHP</figcaption></a></li>
+		<li><a onClick="civ()"><img src="assets/images/civ.png" /> <figcaption style="text-align: center; align-content: center">Civilian</figcaption></a></li>
+		<li><a onClick="lsfd()"><img src="assets/images/lsfd.png" style="width: 215px; height: 215px" /> <figcaption style="text-align: center; align-content: center">LSFD</figcaption></a></li>
+		<li><a onClick="comms()"><img src="assets/images/comms.png" style="width: 215px; height: 215px" /> <figcaption style="text-align: center; align-content: center">Comms</figcaption></a></li>
+
+
+	</ul> 
+    </div>
+  </div>
+   
+<div id="serverSelecter" class="modal bottom-sheet">
+    <div class="modal-content" style="align-content: center">
+      <h4>Select your server:</h4>
+      <div><a class="btn" style="width: 100%" onClick="identifier(1)">Server 1</a></div>
+      <div><a class="btn" style="width: 100%; margin-top:20px" onClick="identifier(2)">Server 2</a></div>
+      <div><a class="btn" style="width: 100%; margin-top: 20px" onClick="identifier(3)">Server 3</a></div>
+
+    </div>
+  </div>
+        
+        
+<div id="identSet" class="modal bottom-sheet">
+	<div class="modal-content" style="align-content: center">
+		<h4>Set your callsign:</h4>
+		<div>
+        	<input id="identInput" type="text">
+          	<label for="identInput">Callsign e.g. CIV-30</label>
+       	</div>
+       	<div>
+       		<div><a class="btn" style="width: 100%; margin-top: 20px" onClick="afterComplete()">Patrol</a></div>
+       	</div>
+
+	</div>
+</div>
+         
+            
+         
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script>
+    function load() {
+		jQuery(".hameid-loader-overlay").fadeOut(3500);
+
+	}
+   
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<script>
+	$('.modal').modal({
+      dismissible: true, // Modal can be dismissed by clicking outside of the modal
+      opacity: .5, // Opacity of modal background
+      inDuration: 300, // Transition in duration
+      outDuration: 200, // Transition out duration
+      startingTop: '4%', // Starting top style attribute
+      endingTop: '10%', // Ending top style attribute
+      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+      	//  alert("Ready");
+        console.log(modal, trigger);
+      	},
+      complete: function() { //alert('Closed');
+      } // Callback for Modal close
+    }
+  	);
+	
+</script>
+<script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
+<script>
+	var uid = {};
+	function setup() {
+		var config = {
+    	apiKey: "AIzaSyBG4ZK8cmy4qJfBlC2fqeOhFNZWIDl4Hns",
+    	authDomain: "personalcad-f34e9.firebaseapp.com",
+    	databaseURL: "https://personalcad-f34e9.firebaseio.com",
+    	projectId: "personalcad-f34e9",
+    	storageBucket: "personalcad-f34e9.appspot.com",
+    	messagingSenderId: "168174453449"
+  		};
+  		firebase.initializeApp(config);
+	  
+	  firebase.auth().onAuthStateChanged(function(user) {
+  		if (user) {
+    	// User is signed in.
+    	var displayName = user.displayName;
+    	var email = user.email;
+		uid = user.uid;
+		console.log(uid);
+			
+			
+  		} else {
+  		}
+	  });
+		
+	
+	}
+	var dept = {};
+	var server = {};
+	function lspd() {
+		var globalref = firebase.database().ref('users/'+uid);
+		console.log('uid is '+ uid);
+		globalref.once('value', function(snapshot) {
+			if(snapshot.child('lspd').val() == true) {
+				console.log('lpsd');
+				$('#serverSelecter').modal('open');
+				$('#modal1').modal('close');
+				dept = "lspd"
+
+			} else {
+				alert('You are not authorized for this department');
+			}
+			console.log(snapshot.child('lspd').val());
+		});
+	}
+	function bcso() {
+		var globalref = firebase.database().ref('users/'+uid);
+		console.log('uid is '+ uid);
+		globalref.once('value', function(snapshot) {
+			if(snapshot.child('bcso').val() == true) {
+				console.log('bcso');
+				$('#serverSelecter').modal('open');
+				$('#modal1').modal('close');
+				dept = "bcso"
+			} else {
+				alert('You are not authorized for this department');
+			}
+			console.log(snapshot.child('bcso').val());
+		});
+	}
+	function sahp() {
+		var globalref = firebase.database().ref('users/'+uid);
+		console.log('uid is '+ uid);
+		globalref.once('value', function(snapshot) {
+			if(snapshot.child('sahp').val() == true) {
+				console.log('sahp');
+				$('#serverSelecter').modal('open');
+				$('#modal1').modal('close');
+				dept = "sahp"
+			} else {
+				alert('You are not authorized for this department');
+			}
+			console.log(snapshot.child('sahp').val());
+		});
+	}
+	function civ() {
+		var globalref = firebase.database().ref('users/'+uid);
+		console.log('uid is '+ uid);
+		globalref.once('value', function(snapshot) {
+			if(snapshot.child('civ').val() == true) {
+				console.log('civ');
+				$('#serverSelecter').modal('open');
+				$('#modal1').modal('close');
+				dept = "civ"
+			} else {
+				alert('You are not authorized for this department');
+			}
+			console.log(snapshot.child('civ').val());
+		});
+	}
+	function lsfd() {
+		var globalref = firebase.database().ref('users/'+uid);
+		console.log('uid is '+ uid);
+		globalref.once('value', function(snapshot) {
+			if(snapshot.child('fire').val() == true) {
+				console.log('fire');
+				$('#serverSelecter').modal('open');
+				$('#modal1').modal('close');
+				dept = "fire"
+			} else {
+				alert('You are not authorized for this department');
+			}
+			console.log(snapshot.child('fire').val());
+		});
+	}
+	function comms() {
+		var globalref = firebase.database().ref('users/'+uid);
+		console.log('uid is '+ uid);
+		globalref.once('value', function(snapshot) {
+			if(snapshot.child('comms').val() == true) {
+				console.log('comms');
+				$('#serverSelecter').modal('open');
+				$('#modal1').modal('close');
+				dept = "comms"
+			} else {
+				alert('You are not authorized for this department');
+			}
+			console.log(snapshot.child('comms').val());
+		});
+	}
+	
+	function identifier(serverS) {
+		console.log(dept);
+		console.log('Server is server '+serverS.toString());
+		server = serverS
+		$('#identSet').modal('open');
+		$('#serverSelecter').modal('close');
+	}
+	
+	function afterComplete() {
+		console.log(server);
+		var ident = document.getElementById('identInput').value;
+		if(dept == "lspd" || dept == "sahp" || dept == "bcso") {
+			firebase.database().ref('users/'+uid+'/identifier').set(ident);
+			window.location = "leo.html?server="+server+"&dept="+dept
+		}
+	}
+	
+</script>
+
+<script>
+	function sugg() {
+		var tsname = document.getElementById('suggname').value;
+		var bug = document.getElementById('suggsugg').value;
+		var canSend = true;
+		if(tsname == "") {alert('Please enter your TS name!'); canSend = false;}
+		if(bug == "") {alert('You can not submit a suggestion without telling us what it is!'); canSend = false;}
+		
+		if(canSend == true) {
+			var globalref = firebase.database().ref();
+			globalref.once('value', function(snapshot) {
+				var bugNum = snapshot.child('lastfeed').val() + 1;
+				
+				firebase.database().ref('feedback/'+bugNum.toString()).set({
+					bug: bug,
+					sender: tsname
+				}).then(function write() {
+					firebase.database().ref('lastfeed').set(bugNum);
+					alert('Your feedback has been submitted!');
+					document.getElementById('suggname').value = "";
+					document.getElementById('suggsugg').value = "";
+				});
+			});
+		}
+		}
+	
+	function bug() {
+		var tsname = document.getElementById('bugname').value;
+		var bug = document.getElementById('bugbug').value;
+		var canSend = true;
+		if(tsname == "") {alert('Please enter your TS name!'); canSend = false;}
+		if(bug == "") {alert('You can not submit a bug without telling us what it is!'); canSend = false;}
+		
+		if(canSend == true) {
+			var globalref = firebase.database().ref();
+			globalref.once('value', function(snapshot) {
+				var bugNum = snapshot.child('lastbug').val() + 1;
+				
+				firebase.database().ref('bugs/'+bugNum.toString()).set({
+					bug: bug,
+					sender: tsname
+				}).then(function write() {
+					firebase.database().ref('lastbug').set(bugNum);
+					alert('Your bug has been submitted!');
+					document.getElementById('bugname').value = "";
+					document.getElementById('bugbug').value = "";
+
+				});
+			});
+		}
+	}
+	
+</script>
+
+
+</body>
+</html>

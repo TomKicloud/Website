@@ -1,0 +1,171 @@
+<!doctype html>
+<html><head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+
+
+
+
+<title>DOJRP MDT</title>
+</head>
+
+<body onLoad="setup()">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+
+<div style="background-color: orange; width: 1920px; height: 50px; display: none">
+	<h4 style="margin-top: 0px; color: white; text-align: center; vertical-align: middle">SIGNAL 100</h4>
+</div>
+<div style="background-color: red; width: 1920px; height: 50px; display: none">
+	<h4 style="margin-top: 0px; color: white; text-align: center; vertical-align: middle">10-3</h4>
+</div>
+
+
+ <div class="row">
+        <div class="card-panel white" style="height: 700px; margin-right: 300px; margin-left: 300px; width: 1300px">
+          <h4 style="color: saddlebrown; margin-top: 0px; text-align: center">Civilian Terminal</h4>
+          <h5 style="text-align: center">Priority Timer: 0:00</h5>
+       	  <h5 style="text-align: center">AOP:</h5>
+          <a class="waves-effect btn-large brown" style="margin-top: 20px; width: 100%">Select Character</a>
+          <a class="waves-effect btn-large blue" style="margin-top: 20px; width: 49%; float: left; color: white">DMV</a>
+          <a class="waves-effect btn-large blue" style="margin-top: 20px; width: 49%; float: right; color: white">Bureau of Firearms</a>
+          <a class="waves-effect btn-large blue" style="margin-top: 20px; width: 49%; float: left; color: white">Warrants</a>
+          <a class="waves-effect btn-large blue" style="margin-top: 20px; width: 49%; float: right; color: white">Edit Character</a>
+       	  <a class="waves-effect btn-large blue" style="margin-top: 20px; width: 100%">Twotter</a>
+       	  
+       	  
+       	  
+       	  
+       	  <a class="waves-effect btn-large blue" style="margin-top: 20px; width: 24%; float: left; color: white">Call 911</a>
+       	  <a class="waves-effect btn-large blue" style="margin-top: 20px; width: 24%; color: white; margin-left: 20px">Live Map</a>
+       	  <a class="waves-effect btn-large blue" style="margin-top: 20px; width: 24%; color: white; float: right">Weapon Structure</a>
+       	  <a class="waves-effect btn-large blue" style="margin-top: 20px; width: 24%; float: right; color: white; margin-right: 20px">Vehicle Structure</a>
+       	  <a class="waves-effect btn-large brown" style="margin-top: 20px; width: 100%">Log Out</a>
+
+
+        </div>
+</div>
+
+  <div id="selectChar" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Select Your Character</h4>
+      <ul id="civList">
+      	<li style="border: 2px solid black; width: 100%; margin-bottom: 10px"><a style="text-align: center; color: white; background-color: saddlebrown" href="404.html">Rover Reddington</a></li>
+      	<li style="border: 2px solid black; width: 100%; margin-bottom: 10px"><a style="text-align: center; color: white; background-color: saddlebrown" href="404.html" >Rover Reddington</a></li>
+      	
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
+
+
+
+	
+
+	
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<script>
+	$('.modal').modal({
+      dismissible: false, // Modal can be dismissed by clicking outside of the modal
+      opacity: .5, // Opacity of modal background
+      inDuration: 300, // Transition in duration
+      outDuration: 200, // Transition out duration
+      startingTop: '4%', // Starting top style attribute
+      endingTop: '10%', // Ending top style attribute
+      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+      	//  alert("Ready");
+        console.log(modal, trigger);
+      	},
+      complete: function() { //alert('Closed');
+      } // Callback for Modal close
+    }
+  	);
+	
+</script>
+<script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
+<script>
+
+	var uid = {};
+	
+	var displayName = {};
+	var fullDisplay = {};
+	var identifier = {};
+	var currentChar = "none";
+	function setup() {
+		var config = {
+    	apiKey: "AIzaSyBG4ZK8cmy4qJfBlC2fqeOhFNZWIDl4Hns",
+    	authDomain: "personalcad-f34e9.firebaseapp.com",
+    	databaseURL: "https://personalcad-f34e9.firebaseio.com",
+    	projectId: "personalcad-f34e9",
+    	storageBucket: "personalcad-f34e9.appspot.com",
+    	messagingSenderId: "168174453449"
+  		};
+  		firebase.initializeApp(config);
+	  
+	  firebase.auth().onAuthStateChanged(function(user) {
+  		if (user) {
+    	// User is signed in.
+    	var email = user.email;
+		uid = user.uid;
+		console.log(uid);
+		
+		var globalref = firebase.database().ref('users/'+uid);
+		console.log('uid is '+ uid);
+		globalref.once('value', function(snapshot) {
+			if(snapshot.child('civ').val() == true) {
+				console.log('validD');
+			} else {
+				alert('You are not authorized for this department');
+				window.location = "index.html";
+			}
+			
+			if(currentChar == "none") {
+				$('#selectChar').modal('open');
+				var charRef = firebase.database().ref('civilians/');
+				charRef.on('value', function(snapshot) {
+					var chars = snapshot.val();
+					$("#civList").empty();
+					snapshot.forEach(function(snap) {
+						if(snap.child('creator').val() == uid) {
+							$('#civList').append('<li style="border: 2px solid black; width: 100%; margin-bottom: 10px"><a style="text-align: center; color: white; background-color: saddlebrown">' + snap.child('name').val() + '</a></li>')
+
+						}
+					});
+				});
+			}
+			
+			
+		});
+			
+  		} else {
+			window.location = "welcome.html";
+  		}
+	  });
+		
+	}
+	
+	function setCiv(name) {
+		console.log(name);
+		currentChar="hi";
+	}
+	
+	
+	
+</script>
+
+
+	
+	
+	
+
+
+</body>
+</html>

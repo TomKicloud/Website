@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Gary Portal</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="assets/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="assets/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="assets/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/css/util.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body onLoad="setup()">
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100" style="width: 700px">
+			<span class="login100-form-title p-b-26" id="tyText">
+						Thank You for joining the Gary Portal. <br/> You are currently in the queue, your account will be set up shortly.
+			</span>
+			
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/vendor/bootstrap/js/popper.js"></script>
+	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/vendor/daterangepicker/moment.min.js"></script>
+	<script src="assets/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<!--<script src="assets/js/main.js"></script>-->
+	
+	<script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
+	<script>
+		function setup() {
+			var config = {
+				apiKey: "AIzaSyAsrjD3G2Fpi4uxV6aFbTfAmF4ecXrG480",
+				authDomain: "gary-portal.firebaseapp.com",
+				databaseURL: "https://gary-portal.firebaseio.com",
+				projectId: "gary-portal",
+				storageBucket: "gary-portal.appspot.com",
+				messagingSenderId: "921790064702"
+			};
+			firebase.initializeApp(config);
+			
+			firebase.auth().onAuthStateChanged(function(user) {
+  			if (user) {
+				var uid = user.uid;
+				var globalref = firebase.database().ref('users/'+uid);
+				globalref.on('value', function(snapshot){
+					if(snapshot.child('queued').val() == false) {
+					   window.location = "profile";
+					} else {
+						var name = snapshot.child('fullName').val();
+						document.getElementById('tyText').innerHTML = "Thank You for joining the Gary Portal, "+name+" <br/> You are currently in the queue, your account will be set up shortly."
+					}
+					
+				});
+  			} else {
+  			}
+			});
+		 }  
+	</script>
+
+</body>
+</html>

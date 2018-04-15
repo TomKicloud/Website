@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<head>
+    <title>Gary Portal</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Responsive HTML5 Website Landing Page for Developers">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+    <link rel="shortcut icon" href="favicon.ico">  
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"> 
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">   
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css">
+    
+    <!-- github calendar css -->
+    <link rel="stylesheet" href="assets/plugins/github-calendar/dist/github-calendar.css"
+/>
+    <!-- github acitivity css -->
+    <link rel="stylesheet" href="assets/plugins/github-activity/src/github-activity.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/octicons/2.0.2/octicons.min.css">
+    
+    <!-- Theme CSS -->  
+    <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+    <link id="theme-main" rel="stylesheet" href="assets/css/main.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+</head> 
+
+<body onLoad="setup()">
+    <!-- ******HEADER****** --> 
+    <header class="header">
+        <div class="container">                       
+            <img class="profile-image img-responsive pull-left" style="width: 180px; height: 180px; border-radius: 90px; border: 1px solid white" id="profilePic"/>
+            <div class="profile-content pull-left">
+                <h1 class="name" id="fullName"></h1>
+                <h2 class="desc" id="sName"></h2>   
+                <h2 class="success" id="bigDisplay"></h2>
+            </div><!--//profile-->
+                        
+        </div><!--//container-->
+        <div class="container">
+        	<div class="container-login100-form-btn" style="min-width: 200px">
+									<div class="wrap-login100-form-btn">
+										<div class="login100-form-bgbtn"></div>
+											<button class="login100-form-btn" style="background-color: darkred" onClick="doTheDesc()">
+												Staff
+											</button>
+										</div>
+									</div>  
+        </div>
+    </header><!--//header-->
+    
+    <div class="container sections-wrapper">
+        <div class="row">
+            <div class="primary col-md-8 col-sm-12 col-xs-12">
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading">About Me</h2>
+                        <div class="content">
+                            <p id="desc"><div class="container-login100-form-btn">
+									<div class="wrap-login100-form-btn">
+										<div class="login100-form-bgbtn"></div>
+											<button class="login100-form-btn" style="background-color: mediumvioletred" onClick="doTheDesc()">
+												Edit
+											</button>
+										</div>
+									</div></p>
+                         	         
+
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+    
+               <section class="skills aside section">
+                    <div class="section-inner">
+                        <h2 class="heading" style="text-align: center">User Statistics:</h2>
+                        <div class="content">
+                          
+                            
+                            <div class="skillset">
+                               
+                                <div class="item">
+                                    <h3 class="level-title" style="text-align: center">Amigo Rank:</h3>
+                                    <span class="login100-form-sub" style="color: dimgray; font-size: 20px" id="aRank"></span>                                      
+                                </div><!--//item-->
+                                
+                                <div class="item">
+                                    <h3 class="level-title" style="text-align: center">Positivity Rank:</h3>
+                                    <span class="login100-form-sub" style="color: dimgray; font-size: 20px" id="pRank"></span>                                  
+                                </div><!--//item-->
+                                
+                                <div class="item">
+                                    <h3 class="level-title" style="text-align: center">Standing:</h3>
+                                    <span class="login100-form-sub" style="color: dimgray; font-size: 20px" id="standing"></span>                                     
+                                </div><!--//item-->
+                                
+                                <div class="item">
+                                    <h3 class="level-title" style="text-align: center">Main Role:</h3>
+                                    <span class="login100-form-sub" style="color: dimgray; font-size: 20px" id="mainRole"></span>                                  
+                                </div><!--//item-->
+                                
+                            </div>              
+                        </div><!--//content-->  
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+                
+                <section class="experience section">
+                    <div class="section-inner">
+                        <h2 class="heading">Misc:</h2>
+                        <div class="content">
+                            <div class="item">
+                                <div class="container-login100-form-btn">
+									<div class="wrap-login100-form-btn">
+										<div class="login100-form-bgbtn"></div>
+											<button class="login100-form-btn" style="background-color: rebeccapurple" onClick="openPrayer()">
+											Prayer Room
+											</button>
+										</div>
+									</div>
+                            </div><!--//item-->
+                            <div class="item">
+                                <div class="container-login100-form-btn">
+									<div class="wrap-login100-form-btn">
+										<div class="login100-form-bgbtn"></div>
+											<button class="login100-form-btn" style="background-color: mediumvioletred" onClick="openNew('https://www.almurray.xyz/rr')">
+											Rules and Regulations
+											</button>
+										</div>
+									</div>
+                            </div><!--//item-->
+                            
+                            <div class="item">
+                                <div class="container-login100-form-btn">
+									<div class="wrap-login100-form-btn">
+										<div class="login100-form-bgbtn"></div>
+											<button class="login100-form-btn">
+											Maps
+											</button>
+										</div>
+									</div>
+                            </div><!--//item-->
+                            <div class="item">
+                                <div class="container-login100-form-btn">
+									<div class="wrap-login100-form-btn">
+										<div class="login100-form-bgbtn"></div>
+											<button class="login100-form-btn" onClick="openNew('https://www.almurray.xyz/computerdating')">
+											'Computer Dating'
+											</button>
+										</div>
+									</div>
+                            </div><!--//item-->
+                            <div class="item">
+                                <div class="container-login100-form-btn">
+									<div class="wrap-login100-form-btn">
+										<div class="login100-form-bgbtn"></div>
+											<button class="login100-form-btn" style="background-color: gray">
+											Settings
+											</button>
+										</div>
+									</div>
+                            </div><!--//item-->
+                            
+                        </div><!--//content-->  
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+                
+            </div><!--//primary-->
+            <div class="secondary col-md-4 col-sm-12 col-xs-12">
+                <aside class="info aside section">
+                    <div class="section-inner">
+                        <div class="content" style="text-align: center">
+                            <ul class="list-unstyled" style="display: inline-block; width: 100%">
+                                <li><div class="container-login100-form-btn">
+									<div class="wrap-login100-form-btn" style="width: 100%">
+										<div class="login100-form-bgbtn"></div>
+											<button class="login100-form-btn" style="background-color: mediumpurple">
+											GaryGram
+											</button>
+										</div>
+									</div></li>
+                                <li><div class="container-login100-form-btn">
+									<div class="wrap-login100-form-btn">
+										<div class="login100-form-bgbtn"></div>
+											<button class="login100-form-btn" style="background-color: dodgerblue">
+											Chat
+											</button>
+										</div>
+									</div></li>
+                            </ul>
+                        </div><!--//content-->  
+                    </div><!--//section-inner-->                 
+                </aside><!--//aside-->
+                 <aside class="info aside section">
+                    <div class="section-inner">
+                        <h2 class="heading" style="text-align: center">Team Details:</h2>
+                        <div class="content" style="text-align: center">
+                            <ul class="list-unstyled" style="display: inline-block">
+                                <li><span class="login100-form-sub" style="font-size: 20px; color: darkgray" id="team">Team: </span></li>
+                                <br/>
+                                <li><span class="login100-form-sub" style="font-size: 20px; color: darkgray" id="teamPos">Team Position: </span></li>
+                            </ul>
+                        </div><!--//content-->  
+                    </div><!--//section-inner-->                 
+                </aside><!--//aside-->
+            <aside class="info aside section">
+                    <div class="section-inner">
+                        <h2 class="heading" style="text-align: center">Points:</h2>
+                        <div class="content" style="text-align: center">
+                            <ul class="list-unstyled" style="display: inline-block">
+                                <li><span class="login100-form-sub" style="font-size: 20px; color: darkgray" id="aP">Amigo Points: </span></li>
+                                <br/>
+                                <li><span class="login100-form-sub" style="font-size: 20px; color: darkgray" id="pP">Positive Points: </span></li>
+                            </ul>
+                        </div><!--//content-->  
+                    </div><!--//section-inner-->                 
+                </aside><!--//aside-->
+                
+                <aside class="testimonials aside section">
+                    <div class="section-inner">
+                        <h2 class="heading">Featured Quote:</h2>
+                        <div class="content">
+                            <div class="item">
+                                <blockquote class="quote">                                  
+                                    <p id="quote"><i class="fa fa-quote-left"></i></p>
+                                </blockquote>                
+                            </div><!--//item-->
+                            
+                            
+                        </div><!--//content-->
+                    </div><!--//section-inner-->
+                </aside><!--//section-->
+
+                
+               
+                
+                <aside class="list conferences aside section">
+                    <div class="section-inner">
+                        <h2 class="heading">Upcoming Events:</h2>
+                        <div class="content">
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-calendar"></i> <a>Spring Solstice</a> </li>
+                                <li><i class="fa fa-calendar"></i> <a>Al Murray's Birthday</a></li>
+                               	<li><i class="fa fa-calendar"></i> <a>Version 3.0</a></li>
+                                
+                            </ul>
+                        </div><!--//content-->
+                    </div><!--//section-inner-->
+                </aside><!--//section-->
+                
+               
+              
+            </div><!--//secondary-->    
+        </div><!--//row-->
+    </div><!--//masonry-->
+    
+    <div id="editDesc" class="modal" style="height: 50%">
+		<div class="container" style="margin-top: 50px; align-content: center; text-align: center">
+      		<h4>Set Your Bio:</h4>
+      		<input class="input100" type="text" id="setDesc">
+      		<div class="container-login100-form-btn">
+				<div class="wrap-login100-form-btn">
+					<div class="login100-form-bgbtn"></div>
+						<button class="login100-form-btn" style="background-color: mediumvioletred" onClick="saveDesc()">
+							Save
+						</button>
+				</div>
+			</div>
+    	</div>
+	</div>
+   
+   <div id="prayerRoom" class="modal" style="height: 50%">
+		<div class="container" style="margin-top: 50px; align-content: center; text-align: center">
+      		<h4>Prayer Room</h4>
+      		<h3 id="prayerCounter">Your current prayers:</h3>
+      		<div class="container-login100-form-btn">
+				<div class="wrap-login100-form-btn">
+					<div class="login100-form-bgbtn"></div>
+						<button class="login100-form-btn" style="background-color: rebeccapurple" onClick="prayer(1)">
+							Simple Prayer
+						</button>
+				</div>
+			</div>
+			<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+								<button class="login100-form-btn" style="background-color: darkred" onClick="prayer(2)">
+									Meaningful Prayer
+								</button>
+						</div>
+					</div>
+			<p>Remember, maximum is 7 prayers a week - 6 simple and 1 meaningful prayers.</p>
+    	</div>
+	</div>
+   
+   <div id="bunny" class="modal" style="height: 50%">
+		<div class="container" style="margin-top: 50px; align-content: center; text-align: center">
+      		<img src="assets/images/bunny.png">
+    	</div>
+	</div>
+    <!--
+    <footer class="footer">
+        <div class="container text-center">
+                
+                <small class="copyright">This is a Beta website not representative of a final Gary</small>
+        </div>
+    </footer>-->
+ 
+    <!-- Javascript -->          
+    <script type="text/javascript" src="assets/plugins/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>    
+    <script type="text/javascript" src="assets/plugins/jquery-rss/dist/jquery.rss.min.js"></script> 
+    <!-- github calendar plugin -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/3.0.2/es6-promise.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fetch/0.10.1/fetch.min.js"></script>
+    <!-- github activity plugin -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
+    <!-- custom js -->
+    
+    <script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
+	<script>
+		var uid = {};
+		var uRef = {};
+		var globalRef = {};
+		function setup() {
+			var config = {
+				apiKey: "AIzaSyAsrjD3G2Fpi4uxV6aFbTfAmF4ecXrG480",
+				authDomain: "gary-portal.firebaseapp.com",
+				databaseURL: "https://gary-portal.firebaseio.com",
+				projectId: "gary-portal",
+				storageBucket: "gary-portal.appspot.com",
+				messagingSenderId: "921790064702"
+			};
+			firebase.initializeApp(config);
+			
+			firebase.auth().onAuthStateChanged(function(user) {
+  			if (user) {
+				uid = user.uid;
+				uRef = firebase.database().ref('users/'+uid);
+				
+				uRef.on('value', function(snapshot) {
+					var name = snapshot.child('fullName').val();
+					var sName = snapshot.child('sName').val();
+					var picURL = snapshot.child('urlToImage').val();
+					var aRank = snapshot.child('aRank').val();
+					var pRank = snapshot.child('pRank').val();
+					var aPoints = snapshot.child('aPoints').val();
+					var pPoints = snapshot.child('pPoints').val();
+					var team = snapshot.child('team').val();
+					var queued = snapshot.child('queued').val();
+					var desc = snapshot.child('desc').val();
+					var standing = snapshot.child('standing').val();
+					var teamRank = snapshot.child('teamRank').val();
+					var mainRole = snapshot.child('mainRole').val();
+					var quote = snapshot.child('quote').val();
+					
+					var simpleP = snapshot.child('prayersSimple').val();
+					var meaningfulP = snapshot.child('prayersMeaningful').val();
+					var totalP = simpleP + meaningfulP;
+					if (queued == true) {
+						window.location = "queue";
+					}
+
+					
+					var banned = snapshot.child('banned').val();
+					
+					
+					document.getElementById('fullName').innerHTML = name;
+					document.getElementById('sName').innerHTML = sName;
+					document.getElementById('profilePic').setAttribute('src', picURL);
+					document.getElementById('aRank').innerHTML = aRank;
+					document.getElementById('pRank').innerHTML = pRank;
+					document.getElementById('aP').innerHTML = "Amigo Points: "+aPoints;
+					document.getElementById('pP').innerHTML = "Positivity Points: "+pPoints;
+					document.getElementById('team').innerHTML = "Team: "+team;
+					document.getElementById('standing').innerHTML = standing;
+					document.getElementById('mainRole').innerHTML = mainRole;
+					document.getElementById('teamPos').innerHTML = "Team Positon: "+teamRank;
+					document.getElementById('mainRole').innerHTML = mainRole;
+					document.getElementById('quote').innerHTML = '<i class="fa fa-quote-left"></i>'+quote;
+					document.getElementById('desc').innerHTML = desc;
+					document.getElementById('setDesc').setAttribute('value', desc);
+					
+					document.getElementById('prayerCounter').innerHTML = "Your Current Prayers: "+totalP.toString();
+
+					
+					
+
+				});
+				
+				globalRef = firebase.database().ref('globalvariables');
+				globalRef.on('value', function(snapshot) {
+					var maint = snapshot.child("maintenance").val();
+					if (maint == true) {
+						window.location = "maintenance";
+					} else {
+						
+					}
+				});
+					
+  			} else {
+				window.location.replace("https://www.almurray.xyz");
+  			}
+			});
+			
+			
+		 }  
+		
+		
+		function doTheDesc() {
+			$('#editDesc').modal('open');
+		}
+		function saveDesc() {
+			firebase.database().ref('users/'+uid).update({
+				desc: document.getElementById('setDesc').value
+			}).then(function thendosave(){
+				$('#editDesc').modal('close');
+			});		
+		}
+		function openPrayer() {
+			$('#prayerRoom').modal('open');
+		}
+		
+		function openNew(url) {
+			var win = window.open(url, '_blank');
+  			win.focus();
+		}
+		
+		
+		function prayer(type) {
+			if (type == 1) {
+				var currentS = {};
+				firebase.database().ref('users/'+uid).once('value', function(snapshot){
+					currentS = snapshot.child('prayersSimple').val();
+				}).then(function updateP(){
+					firebase.database().ref('users/'+uid).update({
+						prayersSimple: currentS + 1
+					});
+				});
+				
+			}
+			if (type == 2) {
+				var currentS = {};
+				firebase.database().ref('users/'+uid).once('value', function(snapshot){
+					currentS = snapshot.child('prayersMeaningful').val();
+				}).then(function updateP(){
+					firebase.database().ref('users/'+uid).update({
+						prayersMeaningful: currentS + 1
+					});
+				});
+				
+			}
+		}
+		
+	</script>            
+    
+   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	<script>
+		$('.modal').modal({
+      		dismissible: true, // Modal can be dismissed by clicking outside of the modal
+			opacity: .5, // Opacity of modal background
+			inDuration: 300, // Transition in duration
+			outDuration: 200, // Transition out duration
+			startingTop: '4%', // Starting top style attribute
+			endingTop: '10%', // Ending top style attribute
+			ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+				//  alert("Ready");
+				console.log(modal, trigger);
+			},
+			complete: function() { //alert('Closed');
+			} // Callback for Modal close
+		});
+	
+</script>
+                                       
+                                                              
+                                                                                                            
+                                        
+                                                                
+</body>
+</html> 
+

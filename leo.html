@@ -1,0 +1,330 @@
+<!doctype html>
+<html><head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+
+
+
+
+<title>DOJRP MDT</title>
+</head>
+
+<body onLoad="setup(); getServer('server'); getDept('dept'); preGet()">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+
+<div style="background-color: orange; width: 1920px; height: 50px; display: none">
+	<h4 style="margin-top: 0px; color: white; text-align: center; vertical-align: middle">SIGNAL 100</h4>
+</div>
+<div style="background-color: red; width: 1920px; height: 50px; display: none">
+	<h4 style="margin-top: 0px; color: white; text-align: center; vertical-align: middle">10-3</h4>
+</div>
+
+<div style="background-color: lightgray; width: 1920px; height: 150px">
+	<img style="width: 150px; height: 150px; float: left" id="deptImage">
+	<h4 style="margin-top: 0px;padding-top: 20px; color: white; text-align: center; margin-left: -150px; vertical-align: middle; float: none; width: 1920px">Mobile Data Terminal</h4>
+	<h5 style="margin-top: 0px; padding-top: 20px; color: white; text-align: center; vertical-align: middle; float: none; margin-left: -150px; width: 1920px" id="welcomeL">Welcome</h5>
+	<a class="btn-large" style="float: right; margin-top: -80px; margin-right: 20px">Logout</a>
+	
+</div>
+
+
+<h4 style="text-align: center; color: white; width: 1920px" id="statusMonger">Your Status:</h4>
+
+<div style="float: left; width: 250px; margin-top: 35px; margin-right: 150px; margin-left: 5px">
+	<div><a class="btn-large" style="width: 250px">Database Search</a></div>
+	<div><a class="btn-large" style="width: 250px; margin-top: 25px">Reports</a></div>
+	<div><a class="btn-large" style="width: 250px; margin-top: 25px">Active Calls</a></div>
+	<div><a class="btn-large" style="width: 250px; margin-top: 25px">Subdivision</a></div>
+	<div><a class="btn-large" style="width: 250px; margin-top: 25px">Notepad</a></div>
+	<div><a class="btn-large" style="width: 250px; margin-top: 25px" onClick="penal()">Penal Code</a></div>
+
+</div>
+<div style="width: 1700px; margin-top: 50px; margin-left: 150px; padding-left: 50px; min-width: 1700px">
+		<a class="btn-large" style="width: 200px; float: left" onClick="ten8()" id="108">10-8</a>
+		<a class="btn-large" style="width: 200px; float: left; margin-left: 30px" id="106" onClick="ten6()">10-6</a>
+		<a class="btn-large" style="width: 200px; float: left; margin-left: 30px" id="107" onClick="ten7()">10-7</a>
+		<a class="btn-large" style="width: 200px; float: left; margin-left: 30px" id="1097" onClick="ten97()">10-97</a>
+		<a class="btn-large" style="width: 200px; float: left; margin-left: 30px" id="1023" onClick="ten23()">10-23</a>
+		<a class="btn-large" style="width: 200px; float: left; margin-left: 30px" id="1015" onClick="ten15()">10-15</a>
+</div>
+<div style="width: 1600px; margin-top: 130px; margin-left: 50px; padding-left: 50px; min-width: 1600px">
+		<a class="btn-large red" style="width: 430px; float: left" id="1042" onClick="ten42()">10-42</a>
+		<a class="btn-large" style="width: 430px; margin-left: 30px; float: right; margin-right: -100px" id="1041" onClick="ten41()">10-41</a>
+		
+</div>
+	
+<div style="width: 1350px; margin-top: 200px; margin-left: 50px; min-width: 1350px; height: 400px; margin-left: 405px; max-height: 400px; border: 2px solid black; background-color: darkblue">
+	<div style="overflow-x: hidden; height: 100%; width: 100%; max-height: 100%; max-width: 100%; margin-top: 0px">
+		<ul id="boloList" style="margin-top: -5px">
+		
+		
+		
+		
+		
+	</ul>
+	
+	
+	</div>
+	
+</div>
+
+
+
+	
+
+	
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<script>
+	$('.modal').modal({
+      dismissible: true, // Modal can be dismissed by clicking outside of the modal
+      opacity: .5, // Opacity of modal background
+      inDuration: 300, // Transition in duration
+      outDuration: 200, // Transition out duration
+      startingTop: '4%', // Starting top style attribute
+      endingTop: '10%', // Ending top style attribute
+      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+      	//  alert("Ready");
+        console.log(modal, trigger);
+      	},
+      complete: function() { //alert('Closed');
+      } // Callback for Modal close
+    }
+  	);
+	
+</script>
+<script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
+<script>
+
+	var uid = {};
+	
+	var displayName = {};
+	var fullDisplay = {};
+	var identifier = {};
+	function setup() {
+		var config = {
+    	apiKey: "AIzaSyBG4ZK8cmy4qJfBlC2fqeOhFNZWIDl4Hns",
+    	authDomain: "personalcad-f34e9.firebaseapp.com",
+    	databaseURL: "https://personalcad-f34e9.firebaseio.com",
+    	projectId: "personalcad-f34e9",
+    	storageBucket: "personalcad-f34e9.appspot.com",
+    	messagingSenderId: "168174453449"
+  		};
+  		firebase.initializeApp(config);
+	  
+	  firebase.auth().onAuthStateChanged(function(user) {
+  		if (user) {
+    	// User is signed in.
+    	var email = user.email;
+		uid = user.uid;
+		console.log(uid);
+		
+		var globalref = firebase.database().ref('users/'+uid);
+		console.log('uid is '+ uid);
+		globalref.once('value', function(snapshot) {
+			if(snapshot.child(currentDept).val() == true) {
+				console.log('validD');
+			} else {
+				alert('You are not authorized for this department');
+				window.location = "index.html";
+			}
+			
+			displayName = snapshot.child('displayName').val();
+			identifier = snapshot.child('identifier').val();
+			fullDisplay = displayName +" "+ identifier;
+			console.log(snapshot.child(currentDept).val());
+			document.getElementById('welcomeL').innerHTML = "Welcome, "+snapshot.child('displayName').val() + " "+snapshot.child('identifier').val();
+			var statusRef = firebase.database().ref('server'+currentServer+'/units/'+uid);
+			
+			setupGather();
+			
+			
+		});
+			
+  		} else {
+			window.locatin = "welcome.html";
+  		}
+	  });
+		
+	
+	}
+	var currentServer = {};
+	var currentDept = {};
+	function getServer(parameterName) {
+		var result = null,
+        tmp = [];
+    	window.location.search.substr(1).split("&").forEach(function (item) {
+          tmp = item.split("=");
+          if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+		currentServer = result;
+    	return result;
+	}
+	function getDept(parameterName) {
+		var result = null,
+        tmp = [];
+    	window.location.search.substr(1).split("&").forEach(function (item) {
+          tmp = item.split("=");
+          if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+		currentDept = result;
+    	return result;
+	}
+	
+	function preGet() {
+		console.log(currentServer);
+		console.log(currentDept);
+		
+		if(currentDept != "lspd" && currentDept != "bcso" && currentDept != "sahp" ) window.location = "index.html";
+		
+		if(isNaN(currentServer) == true) window.location = "index.html";
+		if(parseInt(currentServer) > 4 || parseInt(currentServer) < 1){
+			window.location = "index.html";
+		} else {
+			console.log('valid');
+		}
+		
+		document.getElementById('deptImage').src = "images/"+currentDept+".png";
+		
+		var boloRef = firebase.database().ref('server'+currentServer+'/bolos');
+		boloRef.on('value', function(snapshot){
+			var bolo = snapshot.val();
+			$("#boloList").empty();
+			snapshot.forEach(function(snap) {
+				if(snap.child('type').val() == "Vehicle Bolo") {
+					$("#boloList").append('<li style="width: 1345px; height: 200px; list-style-position: inside; border: 1px solid white; margin-bottom: 2px"><h5 style="color: white; text-align: center">'+snap.child('type').val()+'</h5><h6 style="float: left; color: white; margin-left: 25px; width: 500px; height: 140px; max-width: 500px">'+snap.child('info').val()+'</h6><h6 style="float: right;color: white; width: 500px; text-align: right; margin-right: 25px">REASON: '+snap.child('reason').val()+' </h6><h6 style="float: right;color: white; width: 500px; text-align: right; margin-right: 25px">LAST SEEN: '+snap.child('lastSeen').val()+' </h6><h6 style="float: right;color: white; width: 500px; text-align: right; margin-right: 25px">CAR MODEL: '+snap.child('model').val()+' </h6><h6 style="float: right;color: white; width: 500px; text-align: right; margin-right: 25px">CAR COLOR: '+snap.child('color').val()+' </h6></li>');
+				} 
+				if(snap.child('type').val() == "Person Bolo") {
+					$("#boloList").append('<li style="width: 1345px; height: 200px; list-style-position: inside; border: 1px solid white; margin-bottom: 2px"><h5 style="color: white; text-align: center">'+snap.child('type').val()+'</h5><h6 style="float: left; color: white; margin-left: 25px; width: 500px; height: 140px; max-width: 500px">'+snap.child('info').val()+'</h6><h6 style="float: right;color: white; width: 500px; text-align: right; margin-right: 25px">REASON: '+snap.child('reason').val()+' </h6><h6 style="float: right;color: white; width: 500px; text-align: right; margin-right: 25px">LAST SEEN: '+snap.child('lastSeen').val()+' </h6><h6 style="float: right;color: white; width: 500px; text-align: right; margin-right: 25px">ARMED?: '+snap.child('armed').val()+' </h6></li>');
+				} 
+				
+
+			});
+			
+			$bL = $('#boloList')
+			if ($bL.children().length === 0) {
+				$("#boloList").append('<li style="width: 1345px; height=200px; list-style-position: inside"><h4 style="color: white; text-align: center">No Active BOLOs</h4></li>');
+			}
+			
+			
+			
+		});
+		
+		
+		
+		
+		
+
+	}
+
+	
+	
+	
+</script>
+<script src="assets/js/Gathering.js"></script>
+<script>
+	
+	var gathering = {};
+	var serverRef = {};
+	function setupGather() {
+		document.getElementById('statusMonger').innerHTML = "Your Status: 10-42";
+
+		gathering = new Gathering(firebase.database(), 'Server'+currentServer);
+		gathering.join(identifier, fullDisplay);
+		gathering.onUpdated(function(count, users) {
+    		console.log(gathering.roomName + ' have '+ count +' members.');
+    		console.log('Here is the updated users list -');
+    		for(var i in users) {
+        		console.log(users[i] + '(id: '+ i + ')');
+    		}
+		});
+		
+		serverRef = firebase.database().ref('gatherings/Server'+currentServer+'/'+identifier);
+		serverRef.on('value', function(snapshot) {
+			
+			if(snapshot.child('status').val() != null) {
+				document.getElementById('statusMonger').innerHTML="Your Status: "+snapshot.child('status').val();
+			}
+			if(snapshot.child('status').val() == "10-42") {
+				document.getElementById('108').classList.add('disabled');
+				document.getElementById('106').classList.add('disabled');
+				document.getElementById('107').classList.add('disabled');
+				document.getElementById('1023').classList.add('disabled');
+				document.getElementById('1015').classList.add('disabled');
+				document.getElementById('1097').classList.add('disabled');
+				document.getElementById('1041').classList.remove('disabled');
+			}
+			if(snapshot.child('status').val() == "10-41") {
+				document.getElementById('108').classList.remove('disabled');
+				document.getElementById('106').classList.add('disabled');
+				document.getElementById('107').classList.add('disabled');
+				document.getElementById('1023').classList.add('disabled');
+				document.getElementById('1015').classList.add('disabled');
+				document.getElementById('1097').classList.add('disabled');
+			}
+			
+			if(snapshot.child('status').val() == "10-8") {
+				document.getElementById('108').classList.remove('disabled');
+				document.getElementById('106').classList.remove('disabled');
+				document.getElementById('107').classList.remove('disabled');
+				document.getElementById('1023').classList.remove('disabled');
+				document.getElementById('1015').classList.remove('disabled');
+				document.getElementById('1097').classList.remove('disabled');
+				document.getElementById('1041').classList.add('disabled');
+
+			}
+			
+			if(snapshot.child('status').val() == "10-7") {
+				document.getElementById('1097').classList.add('disabled');
+				document.getElementById('1023').classList.add('disabled');
+				document.getElementById('1015').classList.add('disabled');
+			}
+		});
+	}
+	
+	function ten8(){
+		serverRef.child('status').set('10-8');
+	}
+	function ten7(){
+		serverRef.child('status').set('10-7');
+	}
+	function ten6(){
+		serverRef.child('status').set('10-6');
+	}
+	function ten97(){
+		serverRef.child('status').set('10-97');
+	}
+	function ten23(){
+		serverRef.child('status').set('10-23');
+	}
+	function ten15(){
+		serverRef.child('status').set('10-15');
+	}
+	function ten41(){
+		serverRef.child('status').set('10-41');
+	}
+	function ten42(){
+		serverRef.child('status').set('10-42');
+	}
+	
+	
+	function penal() {
+		
+		var win = window.open('https://docs.google.com/document/d/1JgOyzpc5uSXHxntN5KVIdXeshB-BNpBiIgsJ5NxQICU/edit', target='_blank');
+		win.focus;
+	}
+
+	
+	
+	
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+
+<link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"  media="screen,projection"/>
+
+<title>DOJRP CAD</title>
+</head>
+
+<body onLoad="setup()">
+
+
+
+
+<div class="container">
+	<div class="card" style="border-radius: 20px">
+    <div class="card-content" style="text-align: center">
+      <p>Welcome to the DOJRP CAD/MDT, if you do not have access or can not log in, please see an FTO <b><u>Lead</u></b> on TeamSpeak.</p>
+	  <img src="assets/images/logo.png" alt="DOJRP" style="max-width: 50%;">
+    </div>
+   <div class="card-tabs">
+      <ul class="tabs tabs-fixed-width">
+        <li class="tab"><a class="active" href="#login">Login</a></li>
+        <li class="tab"><a href="#signup">Sign Up</a></li>
+      </ul>
+    </div>
+    <div class="card-content grey lighten-4">
+      <div id="login">
+      	<div class="row">
+      		<div class="input-field col s12">
+          		<input id="emaillogin" type="email">
+          		<label for="emaillogin">Email Address</label>
+        	</div>
+    		<div class="input-field col s12">
+          		<input id="passwordlogin" type="password">
+          		<label for="passwordlogin">Password</label>
+        	</div>
+        	<div class="container" style="align-content: center; text-align: center">
+        		<a id="loginButton" class="waves-effect waves-light btn" style="width: 50%" onClick="login()">Login</a>
+			</div>
+  		</div>
+      </div>
+      <div id="signup"><div class="row">
+      		<div class="input-field col s12">
+          		<input id="emailsignup" type="email">
+          		<label for="emailsignup">Email Address</label>
+        	</div>
+    		<div class="input-field col s12">
+          		<input id="passwordsignup" type="password">
+          		<label for="passwordsignup">Password</label>
+        	</div>
+        	<div class="input-field col s12">
+          		<input id="passwordconfirm" type="password">
+          		<label for="passwordconfirm">Confirm Password</label>
+        	</div>
+        	<div class="input-field col s12">
+          		<input id="nameTS" type="text">
+          		<label for="nameTS">Name on TS  (i.e. Tom K.)</label>
+        	</div>
+        	<div class="input-field col s12">
+          		<input id="secretphrase" type="text">
+          		<label for="secretphrase">SECRET PHRASE</label>
+        	</div>
+        	<div class="container" style="align-content: center; text-align: center">
+        		<a id="signupButton" class="waves-effect waves-light btn" style="width: 50%" onClick="signup()">Sign Up</a>
+			</div>
+  		</div></div>
+    </div>
+  </div>
+</div>
+ 
+ 
+<script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
+<script>
+  function setup() {
+	  var config = {
+    	apiKey: "AIzaSyBG4ZK8cmy4qJfBlC2fqeOhFNZWIDl4Hns",
+    	authDomain: "personalcad-f34e9.firebaseapp.com",
+    	databaseURL: "https://personalcad-f34e9.firebaseio.com",
+    	projectId: "personalcad-f34e9",
+    	storageBucket: "personalcad-f34e9.appspot.com",
+    	messagingSenderId: "168174453449"
+  		};
+  		firebase.initializeApp(config);
+	  
+	  firebase.auth().onAuthStateChanged(function(user) {
+  		if (user) {
+    	// User is signed in.
+    	var displayName = user.displayName;
+    	var email = user.email;
+    	var uid = user.uid;
+		console.log(uid);
+			
+			
+  		} else {
+  		}
+	  });
+  }
+	
+</script>
+<script>
+	function login() {
+		var email = document.getElementById('emaillogin').value;
+		var pass = document.getElementById('passwordlogin').value;
+		
+		firebase.auth().signInWithEmailAndPassword(email,pass).then(function(user) {
+			window.location = "main.html"
+			
+		}).catch(function(error) {
+			var message = error.message;
+			var code = error.code;
+			alert(message);
+		});
+	}
+</script>
+<script>
+	
+	function signup() {
+		var email = document.getElementById('emailsignup').value;
+		var pass = document.getElementById('passwordsignup').value;
+		var conf = document.getElementById('passwordconfirm').value;
+		var tsn = document.getElementById('nameTS').value;
+		var secret = document.getElementById('secretphrase').value;
+		
+		var globalref = firebase.database().ref();
+		var canWrite = true;
+		globalref.on('value', function(snapshot) {
+			if(secret != snapshot.child('secretphrase').val()) {
+				alert('Secret phrase is incorrect!');
+				canWrite = false;
+			}
+		});
+		
+		if(pass.length < 6) {
+			alert('Password must be longer than 6 characters');
+			canWrite = false;
+		}
+		if(pass != conf) { 
+			alert('Passwords do not match!');
+			canWrite = false;
+		}
+		
+		if(canWrite == true) {
+			firebase.auth().createUserWithEmailAndPassword(email, pass).then(function(user) {
+				firebase.database().ref('users/' + user.uid).set({
+					email: email,
+					pass: pass,
+					bcso: false,
+					lspd: false,
+					sahp: false,
+					civ: false,
+					comms: false,
+					fire: false,
+					supervisor: false,
+					admin: false,
+					ftolead: false,
+					displayName: tsn
+					
+				});
+				window.location = "justSigned.html";
+				
+				
+			}).catch(function(error) {
+				var errorCode = error.code;
+				var errorMessage = error.message;
+				alert(errorMessage);
+			});
+		
+		}
+		
+		
+	}
+	
+	
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+</body>
+</html>

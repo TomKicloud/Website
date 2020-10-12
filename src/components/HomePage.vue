@@ -57,7 +57,7 @@
     </div>
     <div style="margin-top: 20px">
       <div class="btn">
-        <b-button variant="info"> Rules and Regulations </b-button>
+        <b-button variant="info" v-on:click="pushrules"> Rules and Regulations </b-button>
       </div>
       <div class="btn">
         <b-button variant="info" v-on:click="pushcomputerdating">
@@ -74,6 +74,9 @@ export default {
   methods: {
     pushcomputerdating: function () {
       this.$router.push({ path: `/computerdating` });
+    },
+    pushrules: function () {
+      this.$router.push({ path: `/rules` });
     },
     pushfeedback: function() {
       window.open('https://form.jotform.com/202855831651356', 'Gary Portal Feedback');

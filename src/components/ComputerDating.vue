@@ -83,6 +83,14 @@
   </div>
 </template>
 
+<script>
+export default {
+    mounted() {
+    this.$router.push("/computerdating");
+  },
+}
+</script>
+
 <style scoped>
 .bg {
   background-image: url("../assets/img/home-banner.jpg");

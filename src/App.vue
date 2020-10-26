@@ -1,16 +1,15 @@
 <template>
   <div id="app">
-    <vue-headful title="Gary Portal"/>
-    <router-view></router-view>
+    <vue-headful title="Gary Portal" />
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script>
 export default {
   name: "App",
-  mounted() {
-    this.$router.push("/");
-  }
 };
 </script>
 
@@ -23,5 +22,4 @@ export default {
   color: #2c3e50;
   position: relative;
 }
-
 </style>

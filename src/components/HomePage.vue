@@ -31,16 +31,19 @@
     </b-container>
 
     <h3 class="header">
-      Gary Portal 3.0 allows you to access your Gary Portal account right from
+      Gary Portal 4.0 allows you to access your Gary Portal account right from
       the comfort of your phone. You can follow your teammates and friends'
       posts on the Feed and message them directly from the chat page. You can
       manage your account and view your amigo points, positivity points and more
       profile information.
-    </h3>
 
+      Chat with friends, use your staff powers, find the hidden dino game and much more in Gary Portal 4.
+
+
+    </h3>
+    <b-button v-on:click="pushWhatsNew"> What's New? </b-button>
     <h3 class="header">
-      Shortly, Gary Portal iOS will be updated to include staff powers, bug
-      fixes and more :)
+      Gary Portal 4 is currently only available for iOS devices, an android and web version will be released by summer 2021.
     </h3>
 
     <div class="btn">
@@ -80,6 +83,9 @@ export default {
     },
     pushfeedback: function() {
       window.open('https://form.jotform.com/202855831651356', 'Gary Portal Feedback');
+    },
+    pushWhatsNew: function() {
+      this.$router.push({ path: '/version4' })
     }
   },
 };

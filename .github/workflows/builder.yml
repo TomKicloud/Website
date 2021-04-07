@@ -1,0 +1,23 @@
+name: "GP-Website"
+
+on:
+  push:
+    branches:
+      - 'feature/v5Update'
+
+jobs:
+  docker-v5:
+    name: Publish - Docker V5
+    runs-on: websitev5
+    if: github.ref == 'refs/heads/feature/v5Update'
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+            docker stop GPWEBDev 2>/dev/null || true
+            docker rm GPWEBDev 2>/dev/null || true
+            docker build -t gpweb-dev -f Dockerfile .
+            docker create -p 0.0.0.0:8081:8081 --name "GPWEBDev" --restart unless-stopped --network="host" gpweb-dev
+            docker start GPWEBDev
+      - uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}

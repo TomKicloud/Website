@@ -9,6 +9,11 @@ const httpClient = axios.create(config);
 
 
 const authInterceptor = config => {
+    config.headers = {
+        'Authorization': `Bearer ${window.getCookie("jwt")}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    };
     return config;
 };
 
@@ -19,13 +24,9 @@ const loggerInterceptor = config => {
 httpClient.interceptors.request.use(authInterceptor);
 httpClient.interceptors.request.use(loggerInterceptor);
 
-httpClient.interceptors.response.use(
-    response => {
-        return response;
-    },
-    error => {
-        return Promise.reject(error);
-    }
-);
+window.getCookie = function(name) {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    if (match) return match[2];
+}
 
 export { httpClient };

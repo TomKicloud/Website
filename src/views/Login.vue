@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Gary Portal</h1>
+    <h1>Gary Portal {{ $store.getters.user?.userName }}</h1>
 
     <form class="createform" @submit.prevent="login">
       <div class="form-group">
@@ -54,14 +54,18 @@ export default {
           password: this.details.password,
         })
         .then((resp) => {
-          console.log(resp);
+          this.$store.commit("updateUser", resp.data);
+          this.$cookies.set("jwt", resp.data.userAuthTokens.authenticationToken);
+          this.$cookies.set("refresh", resp.data.userAuthTokens.refreshToken);
+          this.$cookies.set("uuid", resp.data.userUUID);
         })
-        .catch(() => {
+        .catch((erorr) => {
+          console.log(erorr);
           this.$refs.loginerror.show({
             title: "Warning",
             message:
               "An error occurred, your email/username or password may be incorrect.",
-            okButton: "Ok",
+            cancelButton: "Ok",
             hideSecondButton: true
           });
         });

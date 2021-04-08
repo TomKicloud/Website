@@ -8,7 +8,7 @@
 @import "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css";
 @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css";
 @import "//fonts.googleapis.com/css?family=Nunito";
-
+@import "//fonts.googleapis.com/css?family=Montserrat";
 html {
   max-height: 100vh;
 }
@@ -33,6 +33,7 @@ body {
   background-size: cover;
   overflow-y: hidden;
   height: 100vh;
+  overflow-y: auto;
 }
 
 #nav {

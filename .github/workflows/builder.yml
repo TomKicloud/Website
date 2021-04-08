@@ -13,6 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
+            npm install
             npm run build
             mv dist /home/GaryPortal/Website/dist
       - uses: sarisia/actions-status-discord@v1

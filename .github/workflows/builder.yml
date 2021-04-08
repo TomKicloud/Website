@@ -13,11 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-            docker stop GPWEBDev 2>/dev/null || true
-            docker rm GPWEBDev 2>/dev/null || true
-            docker build -t gpweb-dev -f Dockerfile .
-            docker create -p 0.0.0.0:8081:8081 --name "GPWEBDev" --restart unless-stopped --network="host" gpweb-dev
-            docker start GPWEBDev
+            npm run build
+            mv dist /home/GaryPortal/Website/dist
       - uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}

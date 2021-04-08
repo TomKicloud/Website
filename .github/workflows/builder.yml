@@ -12,10 +12,10 @@ jobs:
     if: github.ref == 'refs/heads/feature/v5Update'
     steps:
       - uses: actions/checkout@v2
-      - run: |
-            npm install
-            npm run build
-            mv dist /home/GaryPortal/Website/dist
+      - uses: actions/setup-node@v2
+      - run: npm install
+      - run: npm build
+      - run: mv dist /home/GaryPortal/WebsiteV5/dist
       - uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}

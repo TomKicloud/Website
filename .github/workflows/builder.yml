@@ -19,7 +19,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       - run: npm install
       - run: npm run build
-      - run: mv dist /home/GaryPortal/WebsiteV5/dist
+      - run: mv dist /home/GaryPortal/WebsiteV5/
       - uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}

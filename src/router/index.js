@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Profile from "../views/Profile.vue";
+import AreWeEpicGaming from "../views/AreWeEpicGaming.vue";
 
 const routes = [
   {
@@ -24,6 +25,12 @@ const routes = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: "/arewegaming",
+    name: "AreWeEpicGaming",
+    component: AreWeEpicGaming,
+
   },
   {
     path: "/about",

@@ -10,7 +10,7 @@ export default function Login() {
     return () => {
       document.getElementById('navbarcont').style.display = "block";
     }
-  }, [])
+  }, []);
 
   const { mutateUser } = useUser({
     redirectTo: "/",

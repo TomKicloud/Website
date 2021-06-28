@@ -24,7 +24,7 @@ export default function NavBar() {
     setNavigation(links);
   }
 
-  const { user } = useUser({ redirectTo: "/auth/login" });
+  const { user } = useUser();
 
 
   return (

@@ -20,10 +20,12 @@ module.exports = {
         grblue4: '#203A43',
       },
       minWidth: {
-        '40': '10rem'
+        '40': '10rem',
+        '48': '12rem'
       },
       maxWidth: {
-        '40': '10rem'
+        '40': '10rem',
+        '48': '12rem'
       }
     },
   },

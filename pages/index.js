@@ -1,9 +1,45 @@
 import Head from "next/head";
-import useUser from "../lib/useUser";
+import GetTokensFromServer from "../lib/getTokens";
+import GetUserFromServer from "../lib/getUser";
+import withSession from "../lib/session";
+import FeedService from "../network/FeedService";
+import { PlayIcon, ChartSquareBarIcon } from "@heroicons/react/outline";
+
+export const getServerSideProps = withSession(async function ({ req, res }) {
+  let user = await GetUserFromServer(req, res);
+  let { token, refresh } = await GetTokensFromServer(req, res);
+
+  if (!user || !token || !refresh) {
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+  }
+
+  let postDTOs = await FeedService.GetPostDTOs(user.userUUID, token)
+    .then((resp) => {
+      return resp.data;
+    })
+    .catch(() => null);
+  console.log(postDTOs);
+  return {
+    props: {
+      user,
+      postDTOs,
+    },
+  };
+});
+
+function PostPreviewContent({ post }) {
+  return post.isVideo ? <PlayIcon className="w-16 h-full self-center m-auto"/>: post.postType === "poll" ? <ChartSquareBarIcon className="w-16 h-full self-center m-auto"/> : <img src={post.postUrl} className="max-w-full max-h-full w-full h-full object-cover rounded-md border-none"/>
+}
 
 const Home = (props) => {
-  const { user } = useUser({ redirectTo: "/auth/login" });
-
+  const user = props.user;
+  const posts = props.postDTOs;
+  console.log(posts);
   return (
     <div>
       <Head>
@@ -25,7 +61,7 @@ const Home = (props) => {
                 </h1>
                 <h1 className="text-3xl">{user?.userSpanishName}</h1>
                 <h1 className="text-xl italic">@{user?.userName}</h1>
-                <button class="mt-1 md:mt-5 p-3 px-5 text-base font-semibold focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-gray-900 focus:outline-none transition-colors duration-200 rounded-xl block border-b border-purple-300 bg-purple-200 hover:bg-purple-300 text-purple-700">
+                <button className="mt-1 md:mt-5 p-3 px-5 text-base font-semibold focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-gray-900 focus:outline-none transition-colors duration-200 rounded-xl block border-b border-purple-300 bg-purple-200 hover:bg-purple-300 text-purple-700">
                   Staff Panel
                 </button>
               </div>
@@ -87,16 +123,15 @@ const Home = (props) => {
 
           <div className="profileCard row-span-2">
             <div className="flex flex-col place-items-center gap-4">
-              <h1 className="text-3xl font-bold">User Posts:</h1>
+              <h1 className="text-3xl font-bold">Recent Posts:</h1>
               <hr />
-
-              <h1 className="profilePointsText">
-                AMIGO POINTS: {user?.userPoints?.amigoPoints?.toLocaleString()}
-              </h1>
-              <h1 className="profilePointsText">
-                POSITIVE POINTS:{" "}
-                {user?.userPoints?.positivityPoints?.toLocaleString()}
-              </h1>
+              <div className="grid grid-cols-3 gap-y-2 gap-x-2 md:gap-x-5">
+                {posts?.slice(1).slice(-6).map((post) => (
+                  <div className="profilePost" key={post.postId} className="max-w-40 max-h-40 rounded-lg shadow bg-darkgray overflow-none justify-center place-items-center">
+                    <PostPreviewContent post={post}/>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -115,7 +150,9 @@ const Home = (props) => {
                 <div className="miscCard rules">
                   <h1 className="cardName">Rules &amp; Regulations</h1>
                   <div className="desc">
-                    <span>The official Rules and Regulations of Gary Portal</span>
+                    <span>
+                      The official Rules and Regulations of Gary Portal
+                    </span>
                   </div>
                 </div>
                 <div className="miscCard feedback">

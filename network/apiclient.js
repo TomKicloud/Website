@@ -2,7 +2,7 @@ import axios from "axios";
 import { parseCookies, setCookie, destroyCookie } from "nookies";
 
 let config = {
-    baseURL: "https://api-dev-v5.garyportal.tomk.online/api/"
+    baseURL: "https://api-dev.garyportal.tomk.online/api/"
 };
 
 const httpClient = axios.create(config);

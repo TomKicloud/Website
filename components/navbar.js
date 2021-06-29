@@ -56,7 +56,7 @@ export default function NavBar() {
                     src="https://cdn.tomk.online/GaryPortal/AppLogo.png"
                     alt="Workflow"
                   />
-                  <p className="px-5 text-lg font-bold">Gary Portal </p>
+                  <p className="px-5 text-lg font-bold text-white">Gary Portal </p>
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">

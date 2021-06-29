@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+hr {
+    @apply w-full;
+}
+.flexrow_sm_grid {
+    @apply flex flex-col md:flex-row place-items-center md:place-items-start;
+}
+
+.profileContainer {
+    @apply px-5 pt-5 justify-center place-items-center;
+}
+.profileGrid {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-y-5 gap-x-0 md:gap-x-5;
+}
+.profileCard {
+    @apply bg-darkgraylight shadow-lg rounded-xl py-5 px-3;
+}
+
+.profileCard2 {
+    @apply bg-darkgraylight shadow-lg rounded-xl py-5 px-3 col-span-2;
+}
+
+.profilePointsText {
+    @apply text-2xl font-bold;
+}

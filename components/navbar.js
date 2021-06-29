@@ -14,7 +14,8 @@ export default function NavBar() {
     { name: "Profile", href: "#", current: true },
     { name: "Feed", href: "#", current: false },
     { name: "Chat", href: "#", current: false },
-    { name: "Games", href: "#", current: false },
+    { name: "Team Hub (Coming Soon!)", href: "#", current: false, disabled: true },
+    { name: "Games (Coming Soon!)", href: "#", current: false, disabled: true },
   ]);
 
   function setCurrent(name) {
@@ -64,12 +65,12 @@ export default function NavBar() {
                       <span
                         key={item.name}
                         href={item.href}
-                        className={classNames(
+                        className={`${classNames(
                           item.current
                             ? "bg-gray-900 text-white"
                             : "text-gray-300 hover:bg-gray-700 hover:text-white",
                           "px-3 py-2 rounded-md text-sm font-medium"
-                        )}
+                        )} ${item.disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
                         aria-current={item.current ? "page" : undefined}
                         onClick={() => {
                           setCurrent(item.name);

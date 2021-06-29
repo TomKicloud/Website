@@ -1,0 +1,53 @@
+.profileContainer {
+  @apply px-5 py-5 justify-center place-items-center;
+}
+
+.profileGrid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-y-5 gap-x-0 md:gap-x-5;
+}
+
+.profileCard {
+  @apply bg-gray-100 dark:bg-darkgraylight shadow-lg rounded-xl py-5 px-3;
+}
+
+.profileCard2 {
+  @apply bg-gray-100 dark:bg-darkgraylight shadow-lg rounded-xl py-5 px-3 col-span-2;
+}
+
+.profilePointsText {
+  @apply text-2xl font-bold;
+}
+
+.profileStatsPre {
+  @apply text-2xl font-normal;
+}
+
+.profileStatsText {
+  @apply text-3xl font-bold;
+}
+
+.miscCard {
+  @apply min-w-40 max-w-40 h-40 rounded-md shadow relative text-white;
+}
+
+.miscCard.prayer {
+  @apply bg-gradient-to-tr from-grpurple to-grpurple2;
+}
+.miscCard.rules {
+  @apply bg-gradient-to-tr from-grpink to-grredorange;
+}
+.miscCard.feedback {
+  @apply bg-gradient-to-br from-grorange to-darkgray;
+}
+.miscCard.computer {
+  @apply bg-gradient-to-tr from-grblue to-grpink2;
+}
+.miscCard.settings {
+  @apply bg-gradient-to-tr from-grblue3 to-grblue4;
+}
+.miscCard > .cardName {
+  @apply w-full font-bold text-center pt-1 px-3;
+}
+.miscCard > .desc {
+    @apply absolute w-full py-2 px-2 bottom-0 bg-darkgray opacity-50 rounded-t-lg rounded-b-md text-sm text-center;
+}

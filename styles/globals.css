@@ -2,27 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    font-family: "Montserrat";
+}
+
 hr {
-    @apply w-full;
-}
-.flexrow_sm_grid {
-    @apply flex flex-col md:flex-row place-items-center md:place-items-start;
+    @apply w-full border-gray-200 dark:border-gray-700;
 }
 
-.profileContainer {
-    @apply px-5 pt-5 justify-center place-items-center;
-}
-.profileGrid {
-    @apply grid grid-cols-1 md:grid-cols-3 gap-y-5 gap-x-0 md:gap-x-5;
-}
-.profileCard {
-    @apply bg-gray-100 dark:bg-darkgraylight shadow-lg rounded-xl py-5 px-3;
-}
-
-.profileCard2 {
-    @apply bg-gray-100 dark:bg-darkgraylight shadow-lg rounded-xl py-5 px-3 col-span-2;
-}
-
-.profilePointsText {
-    @apply text-2xl font-bold;
+.flexrow_sm_col {
+    @apply flex flex-col md:flex-row place-items-center md:place-items-center;
 }

@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../styles/profile.css";
 import { ThemeProvider } from "next-themes";
 import NavBar from "../components/navbar";
 import App from "next/app";

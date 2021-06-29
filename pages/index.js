@@ -18,12 +18,7 @@ export const getServerSideProps = withSession(async function ({ req, res }) {
     };
   }
 
-  let postDTOs = await FeedService.GetPostDTOs(user.userUUID, token)
-    .then((resp) => {
-      return resp.data;
-    })
-    .catch(() => null);
-  console.log(postDTOs);
+  let postDTOs = await FeedService.GetPostDTOs(user.userUUID, token);
   return {
     props: {
       user,
@@ -39,7 +34,6 @@ function PostPreviewContent({ post }) {
 const Home = (props) => {
   const user = props.user;
   const posts = props.postDTOs;
-  console.log(posts);
   return (
     <div>
       <Head>

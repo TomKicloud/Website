@@ -11,7 +11,7 @@ export default withSession(async (req, res) => {
       .then((resp) => {
         res.json({
             isLoggedIn: true,
-            ...resp.data
+            ...resp
         });
       })
       .catch(() => {

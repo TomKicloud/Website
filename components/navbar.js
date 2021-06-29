@@ -14,7 +14,12 @@ export default function NavBar() {
     { name: "Profile", href: "#", current: true },
     { name: "Feed", href: "#", current: false },
     { name: "Chat", href: "#", current: false },
-    { name: "Team Hub (Coming Soon!)", href: "#", current: false, disabled: true },
+    {
+      name: "Team Hub (Coming Soon!)",
+      href: "#",
+      current: false,
+      disabled: true,
+    },
     { name: "Games (Coming Soon!)", href: "#", current: false, disabled: true },
   ]);
 
@@ -27,12 +32,14 @@ export default function NavBar() {
 
   const { user } = useUser();
 
-
   return (
     <Disclosure as="nav" className="bg-gray-800" id="navbarcont">
       {({ open }) => (
         <>
-          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8" id="navbarcont">
+          <div
+            className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8"
+            id="navbarcont"
+          >
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -57,7 +64,9 @@ export default function NavBar() {
                     src="https://cdn.tomk.online/GaryPortal/AppLogo.png"
                     alt="Workflow"
                   />
-                  <p className="px-5 text-lg font-bold text-white">Gary Portal </p>
+                  <p className="px-5 text-lg font-bold text-white">
+                    Gary Portal{" "}
+                  </p>
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
@@ -70,7 +79,11 @@ export default function NavBar() {
                             ? "bg-gray-900 text-white"
                             : "text-gray-300 hover:bg-gray-700 hover:text-white",
                           "px-3 py-2 rounded-md text-sm font-medium"
-                        )} ${item.disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+                        )} ${
+                          item.disabled
+                            ? "cursor-not-allowed opacity-50"
+                            : "cursor-pointer"
+                        }`}
                         aria-current={item.current ? "page" : undefined}
                         onClick={() => {
                           setCurrent(item.name);

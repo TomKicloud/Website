@@ -1,5 +1,4 @@
 import axios from "axios";
-import { parseCookies, setCookie, destroyCookie } from "nookies";
 
 let config = {
     baseURL: "https://api-dev.garyportal.tomk.online/api/"
@@ -16,23 +15,22 @@ httpClient.interceptors.response.use(response => response, error => {
     return Promise.reject(error);
 });
 
-
 class ApiClient {
 
-  static get(url, authToken) {
+  static async get(url, authToken) {
     return httpClient.get(url, {
         headers: {
             "Content-Type": "application/json",
-            'Authorization': `Bearer ${authToken ?? parseCookies().jwt}`
+            'Authorization': `Bearer ${authToken}`
         }
     });
   }
 
-  static post(url, body, authToken) {
+  static async post(url, body, authToken) {
     return httpClient.post(url, JSON.stringify(body), {
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${authToken ?? parseCookies().jwt}`
+        'Authorization': `Bearer ${authToken ?? ""}`
       },
     });
   }

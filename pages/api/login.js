@@ -2,9 +2,12 @@ import withSession from "../../lib/session";
 import UserService from "../../network/UserService";
 
 export default withSession(async (req, res) => {
-  const user = await UserService.authenticate(req.body.authenticator, req.body.password)
-    .then(async (resp) => {
-      return resp.data;
+  const user = await UserService.authenticate(
+    req.body.authenticator,
+    req.body.password
+  )
+    .then((resp) => {
+      return resp;
     })
     .catch(() => {
       return null;

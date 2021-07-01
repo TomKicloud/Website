@@ -163,14 +163,17 @@ const Home = (props) => {
                   </div>
                 </Link>
 
-                <div className="miscCard rules">
-                  <h1 className="cardName">Rules &amp; Regulations</h1>
-                  <div className="desc">
-                    <span>
-                      The official Rules and Regulations of Gary Portal
-                    </span>
+                <Link href="/rules">
+                  <div className="miscCard rules">
+                    <h1 className="cardName">Rules &amp; Regulations</h1>
+                    <div className="desc">
+                      <span>
+                        The official Rules and Regulations of Gary Portal
+                      </span>
+                    </div>
                   </div>
-                </div>
+                </Link>
+
                 <div className="miscCard feedback">
                   <h1 className="cardName">Feedback</h1>
                   <div className="desc">

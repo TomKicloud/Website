@@ -1,0 +1,19 @@
+.ruleCard {
+  @apply bg-darkgraylight rounded-xl shadow p-5 m-5 text-white text-center md:text-left;
+}
+
+.ruleHeader {
+  @apply text-2xl font-bold;
+}
+
+.max-h-0 {
+  max-height: 0;
+}
+
+.list {
+    @apply list-disc list-inside m-5;
+}
+
+.list > .listItem {
+    @apply p-2;
+}

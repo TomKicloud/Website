@@ -27,7 +27,7 @@
 }
 
 .miscCard {
-  @apply min-w-48 max-w-48 h-40 rounded-md shadow relative text-white;
+  @apply min-w-48 max-w-48 h-40 rounded-md shadow relative text-white cursor-pointer hover:min-w-52 hover:max-w-52 transition duration-300 ease-in-out;
 }
 
 .miscCard.prayer {

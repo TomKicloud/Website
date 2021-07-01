@@ -34,6 +34,15 @@ class ApiClient {
       },
     });
   }
+
+  static async put(url, body, authToken) {
+    return httpClient.put(url, JSON.stringify(body), {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authToken}`
+      }
+    });
+  }
 }
 
 export default ApiClient;

@@ -4,6 +4,10 @@ import GetUserFromServer from "../lib/getUser";
 import withSession from "../lib/session";
 import FeedService from "../network/FeedService";
 import { PlayIcon, ChartSquareBarIcon } from "@heroicons/react/outline";
+import Link from "next/link";
+import Modal from "react-modal";
+
+Modal.setAppElement("#__next");
 
 export const getServerSideProps = withSession(async function ({ req, res }) {
   let user = await GetUserFromServer(req, res);
@@ -28,7 +32,16 @@ export const getServerSideProps = withSession(async function ({ req, res }) {
 });
 
 function PostPreviewContent({ post }) {
-  return post.isVideo ? <PlayIcon className="w-16 h-full self-center m-auto"/>: post.postType === "poll" ? <ChartSquareBarIcon className="w-16 h-full self-center m-auto"/> : <img src={post.postUrl} className="max-w-full max-h-full w-full h-full object-cover rounded-md border-none"/>
+  return post.isVideo ? (
+    <PlayIcon className="w-16 h-full self-center m-auto" />
+  ) : post.postType === "poll" ? (
+    <ChartSquareBarIcon className="w-16 h-full self-center m-auto" />
+  ) : (
+    <img
+      src={post.postUrl}
+      className="max-w-full max-h-full w-full h-full object-cover rounded-md border-none"
+    />
+  );
 }
 
 const Home = (props) => {
@@ -40,7 +53,6 @@ const Home = (props) => {
         <title>Gary Portal</title>
         <meta name="description" content="Gary Portal Website" />
       </Head>
-
       <div className="profileContainer">
         <div className="profileGrid">
           <div className="profileCard2">
@@ -120,11 +132,18 @@ const Home = (props) => {
               <h1 className="text-3xl font-bold">Recent Posts:</h1>
               <hr />
               <div className="grid grid-cols-3 gap-y-2 gap-x-2 md:gap-x-5">
-                {posts?.slice(1).slice(-6).map((post) => (
-                  <div className="profilePost" key={post.postId} className="max-w-40 max-h-40 rounded-lg shadow bg-darkgray overflow-none justify-center place-items-center">
-                    <PostPreviewContent post={post}/>
-                  </div>
-                ))}
+                {posts
+                  ?.slice(1)
+                  .slice(-6)
+                  .map((post) => (
+                    <div
+                      className="profilePost"
+                      key={post.postId}
+                      className="max-w-40 max-h-40 rounded-lg shadow bg-darkgray overflow-none justify-center place-items-center"
+                    >
+                      <PostPreviewContent post={post} />
+                    </div>
+                  ))}
               </div>
             </div>
           </div>
@@ -135,12 +154,15 @@ const Home = (props) => {
               <hr />
 
               <div className="flex flex-row gap-5 max-w-full overflow-x-auto max-w-full">
-                <div className="miscCard prayer">
-                  <h1 className="cardName">Prayer Room</h1>
-                  <div className="desc">
-                    <span>For all your praying needs</span>
+                <Link href="/profile/prayerRoom">
+                  <div className="miscCard prayer">
+                    <h1 className="cardName">Prayer Room</h1>
+                    <div className="desc">
+                      <span>For all your praying needs</span>
+                    </div>
                   </div>
-                </div>
+                </Link>
+
                 <div className="miscCard rules">
                   <h1 className="cardName">Rules &amp; Regulations</h1>
                   <div className="desc">

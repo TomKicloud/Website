@@ -13,3 +13,11 @@ hr {
 .flexrow_sm_col {
     @apply flex flex-col md:flex-row place-items-center md:place-items-center;
 }
+
+.pageTitle {
+    @apply font-bold text-5xl;
+}
+
+.pageSubtitle {
+    @apply font-semibold text-3xl;
+}

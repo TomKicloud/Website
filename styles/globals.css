@@ -3,21 +3,25 @@
 @tailwind utilities;
 
 body {
-    font-family: "Montserrat";
+  font-family: "Montserrat";
 }
 
 hr {
-    @apply w-full border-gray-200 dark:border-gray-700;
+  @apply w-full border-gray-200 dark:border-gray-700;
 }
 
 .flexrow_sm_col {
-    @apply flex flex-col md:flex-row place-items-center md:place-items-center;
+  @apply flex flex-col md:flex-row place-items-center md:place-items-center;
 }
 
 .pageTitle {
-    @apply font-bold text-5xl;
+  @apply font-bold text-5xl;
 }
 
 .pageSubtitle {
-    @apply font-semibold text-3xl;
+  @apply font-semibold text-3xl;
+}
+
+.card {
+  @apply bg-gray-100 dark:bg-darkgraylight rounded-xl shadow p-5 m-5 text-center md:text-left;
 }

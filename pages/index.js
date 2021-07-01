@@ -180,12 +180,16 @@ const Home = (props) => {
                     <span>Provide meaningful feedback to Al Himself</span>
                   </div>
                 </div>
-                <div className="miscCard computer">
-                  <h1 className="cardName">Computer Dating</h1>
-                  <div className="desc">
-                    <span>Re-read the original prophecy</span>
+
+                <Link href="/computerdating">
+                  <div className="miscCard computer">
+                    <h1 className="cardName">Computer Dating</h1>
+                    <div className="desc">
+                      <span>Re-read the original prophecy</span>
+                    </div>
                   </div>
-                </div>
+                </Link>
+
                 <div className="miscCard settings">
                   <h1 className="cardName">Settings</h1>
                   <div className="desc">

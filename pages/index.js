@@ -53,7 +53,7 @@ const Home = (props) => {
         <title>Gary Portal</title>
         <meta name="description" content="Gary Portal Website" />
       </Head>
-      <div className="profileContainer">
+      <div className="pageContainer">
         <div className="profileGrid">
           <div className="profileCard2">
             <div className="flexrow_sm_col">

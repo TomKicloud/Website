@@ -53,7 +53,7 @@ export default function PrayerRoom(props) {
   };
 
   return (
-    <div className="profileContainer">
+    <div className="pageContainer">
       <h1 className="pageTitle">Prayer Center:</h1>
       <div className="rounded-lg p-5 w-full md:w-1/3 bg-darkgray dark:bg-gray-700 text-white mt-20 m-auto shadow-lg flex flex-col gap-2">
         <h2 className="pageSubtitle text-center">Your Current Prayers:</h2>

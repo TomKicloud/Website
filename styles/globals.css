@@ -25,3 +25,7 @@ hr {
 .card {
   @apply bg-gray-100 dark:bg-darkgraylight rounded-xl shadow p-5 m-5 text-center md:text-left;
 }
+
+.pageContainer {
+  @apply px-5 py-5 justify-center place-items-center;
+}

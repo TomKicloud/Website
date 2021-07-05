@@ -1,5 +1,7 @@
+import { DateTime } from "luxon";
 import { Component, useEffect, useState } from "react";
 import FeedPostHeader from "./feed/FeedPostHeader";
+import FeedCommentsView from "./feed/FeedCommentsView";
 
 const FeedScroller = (props) => {
   const [posts, addPosts] = useState([]);
@@ -37,12 +39,12 @@ const FeedScroller = (props) => {
             controls
             controlsList="nodownload"
             key={post.postUrl}
-            className="max-w-50% md:max-w-35% m-auto p-3 mb-3 rounded-md shadow-xl object-cover bg-white dark:bg-darkgray"
+            className="max-h-65vh m-auto p-3 mb-3 rounded-md shadow-xl object-cover bg-white dark:bg-darkgray flex-1 object-scale-down"
           >
             <source
               src={post.postUrl}
               type="video/mp4"
-              className="object-cover rounded-md"
+              className=" rounded-md"
             ></source>
           </video>
         );
@@ -50,13 +52,13 @@ const FeedScroller = (props) => {
         return (
           <img
             src={post.postUrl}
-            className="max-w-50% md:max-w-35% m-auto mb-3 rounded-md shadow-xl"
+            className="max-w-50% md:max-w-35% m-auto mb-3 rounded-md shadow-xl flex-1"
           ></img>
         );
       }
     }
 
-    return <p>Not supported</p>;
+    return <p className="flex-1">Not supported</p>;
   }
 
   return (
@@ -76,11 +78,14 @@ const FeedScroller = (props) => {
             <FeedPostHeader post={post} />
             <div className="flex flex-row gap-1 content-center">
               {getPostContentToDisplay(post)}
-              {/* <div className="flex flex-col gap-1">
-                {post.comments.map((comment) => (
-                  <div key={comment.feedCommentId}>{JSON.stringify(comment)}</div>
-                ))}
-              </div> */}
+              <FeedCommentsView comments={post.comments} />
+            </div>
+            <div
+              className={`w-full block md:hidden font-bold text-center text-xs p-3 ${
+                post.comments.length > 0 ? "block" : "hidden"
+              }`}
+            >
+              Visit Gary Portal from the iOS app to view comments on this post
             </div>
           </div>
         ))}

@@ -8,6 +8,10 @@ class FeedService {
     static async GetFeedPosts(teamId, startFrom = new Date(), limit = 10, auth) {
         return ApiClient.get(`feed?startfrom=${startFrom}&limit=${limit}&teamId=${teamId}&includeComments=true`, auth).then((resp) => { return resp.data }).catch((error) => { console.log(error)});
     }
+
+    static async GetAditLogs(teamId, auth) {
+        return ApiClient.get(`feed/aditlogs?teamId=${teamId}`, auth).then((resp) => { return resp.data ?? [] }).catch({});
+    }
 }
 
 export default FeedService;

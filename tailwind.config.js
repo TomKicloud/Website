@@ -27,6 +27,7 @@ module.exports = {
         '1/4': '25%',
       },
       maxWidth: {
+        '24': '6rem',
         '40': '10rem',
         '44': '11rem',
         '48': '12rem',

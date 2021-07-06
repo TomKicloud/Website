@@ -29,3 +29,14 @@ hr {
 .pageContainer {
   @apply px-5 py-5 justify-center place-items-center;
 }
+
+.modal {
+  position: absolute;
+  top: 50%;
+  bottom: auto;
+  left: 50%;
+  right: auto;
+  margin-right: -50;
+  transform: translate(-50%, -50%);
+  @apply bg-gray-100 dark:bg-darkgraylight rounded-xl shadow-xl text-center p-5 focus:outline-none;
+}

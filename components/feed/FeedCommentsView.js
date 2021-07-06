@@ -2,6 +2,8 @@ import { DateTime } from "luxon";
 
 const FeedCommentsView = (props) => {
   const comments = props.comments;
+  const description = props.description;
+
   return (
     <div>
       <div
@@ -10,6 +12,22 @@ const FeedCommentsView = (props) => {
         }`}
       >
         <h1 className="font-bold px-3">Comments:</h1>
+
+        {/* Description */}
+        <div className={`flex flex-col items-start px-3 ${description.desc === "" ? 'hidden' : 'block' }`}>
+          <div className="py-3 flex flex-row">
+            <img
+              src={description.poster.userProfileImageUrl}
+              className="w-8 h-8 rounded-full"
+            />
+            <p className="self-center px-3 font-bold">
+              {description.poster.userFullName}
+            </p>
+          </div>
+          <p>{description.desc}</p>
+        </div>
+
+        {/* Comments */}
         {comments.map((comment) => (
           <div
             key={comment.feedCommentId}
@@ -23,16 +41,13 @@ const FeedCommentsView = (props) => {
               <p className="self-center px-3 font-bold">
                 {comment.userDTO.userFullName}
               </p>
-              <p className="self-center px-3 italic font-extralight text-sm">
-                {DateTime.fromMillis(
-                  new Date(comment.commentedAt).getTime()
-                ).toRelative()}
-              </p>
             </div>
             <p>{comment.comment}</p>
           </div>
         ))}
-        <h1 className='font-bold px-3 text-xs text-center py-5'>Visit Gary Portal from the iOS app to comment on this post</h1>
+        <h1 className="font-bold px-3 text-xs text-center py-5">
+          Visit Gary Portal from the iOS app to comment on this post
+        </h1>
       </div>
     </div>
   );

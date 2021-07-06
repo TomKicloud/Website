@@ -9,11 +9,13 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function NavBar() {
+export default function NavBar(props) {
+
+  const name = props.page;
   const [navigation, setNavigation] = useState([
-    { name: "Profile", href: "#", current: true },
-    { name: "Feed", href: "#", current: false },
-    { name: "Chat", href: "#", current: false },
+    { name: "Profile", href: "/", current: name === "Home" },
+    { name: "Feed", href: "/feed", current: name === "Feed" },
+    { name: "Chat", href: "/chat", current: name === "Chat" },
     {
       name: "Team Hub (Coming Soon!)",
       href: "#",
@@ -71,7 +73,7 @@ export default function NavBar() {
                 <div className="hidden md:block md:ml-6">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <span
+                      <a
                         key={item.name}
                         href={item.href}
                         className={`${classNames(
@@ -90,7 +92,7 @@ export default function NavBar() {
                         }}
                       >
                         {item.name}
-                      </span>
+                      </a>
                     ))}
                   </div>
                 </div>

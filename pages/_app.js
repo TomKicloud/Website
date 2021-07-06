@@ -9,7 +9,7 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
     return (
       <ThemeProvider enableSystem={true} attribute="class">
-        <NavBar></NavBar>
+        <NavBar page={Component.name}></NavBar>
         <Component {...pageProps} />
       </ThemeProvider>
     );
